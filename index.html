@@ -7,7 +7,7 @@
 		<title>GraphQL with Sangria</title>
 
 		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Oleg Ilyenko">
+		<meta name="author" content="Kaushik and Shrey">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -59,7 +59,7 @@
           </p>
 
           <p style="font-size: 70%; opacity: 0.5" class="normal-font">
-            by Oleg Ilyenko / <a href="https://twitter.com/easyangel">@easyangel</a>
+            by Kaushik and Shrey
           </p>
 				</section>
 
@@ -68,7 +68,24 @@
 
           <img src="assets/img/rest-api.svg" style="width: 80%">
         </section>
-
+        
+        <section>
+          <div style="display: flex;">
+            <img src="assets/img/dream11.png" width="60%" height="60%">
+            <div>
+              <div style="text-align:left; margin-bottom:20px">API required</div>
+              <ul>
+                <li>/users</li>
+                <li>/my-contests</li>
+                <li>/upcoming-matches</li>
+                <li>/invites</li>
+                <li>/rewards</li>
+                <li>and ...</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+        
         <section>
           <h2>Common Issues</h2>
 
@@ -77,14 +94,14 @@
               Over-fetching
 
               <ul class="fragment fade-in" data-fragment-index="1">
-                <li>/products?<span class="qname">field</span>=<span class="qvalue">name</span>&<span class="qname">field</span>=<span class="qvalue">description</span>&<span class="qname">field</span>=<span class="qvalue">variants[*].price</span></li>
+                <li>/users</li>
               </ul>
             </li>
             <li class="fragment fade-in" data-fragment-index="2">
               Under-fetching
 
               <ul class="fragment fade-in" data-fragment-index="3">
-                <li>/products?<span class="qname">expand</span>=<span class="qvalue">productType</span>&<span class="qname">expand</span>=<span class="qvalue">variants[*].price.taxRate</span></li>
+                <li>/invites</li>
               </ul>
             </li>
             <li class="fragment fade-in" data-fragment-index="4">
@@ -98,13 +115,7 @@
             </li>
           </ul>
         </section>
-
-        <section>
-          <h2>API Gateways</h2>
-
-          <img src="assets/img/api-gateway.svg">
-        </section>
-
+        
         <section>
           <h2>GraphQL Approach</h2>
 
