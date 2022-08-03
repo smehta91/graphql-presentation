@@ -134,33 +134,36 @@
           <h2>Type System</h2>
 
           <pre style="float: left; width: 60%"><code data-trim contenteditable class="javascript">
-type Picture {
-  width: Int!
-  height: Int!
-  url: String
+
+type Squad {
+  name
 }
+
           </code></pre>
 
-          <pre style="float: left; width: 40%" class="fragment fade-in" data-fragment-index="3"><code data-trim contenteditable class="javascript">
-type Query {
-  product(id: Int!): Product
-  products: [Product]
-}
-          </code></pre>
-
-          <pre style="float: left; width: 60%" class="fragment fade-in" data-fragment-index="1"><code data-trim contenteditable class="javascript">
-interface Identifiable {
-  id: String!
+          <pre style="float: left; width: 40%" class="fragment fade-in" data-fragment-index="1"><code data-trim contenteditable class="javascript">
+type Match {
+  id: Int!
+  invite: {
+    count: Int
+  }
+  squads: [Squad]
 }
           </code></pre>
 
           <pre style="float: left; width: 60%" class="fragment fade-in" data-fragment-index="2"><code data-trim contenteditable class="javascript">
-type Product implements Identifiable {
-  id: String!
-  name: String!
-  description: String
-  picture(size: Int): Picture
-}
+            type Game {
+              id: Int!
+              name: String!
+              matches: [Match]
+            }
+          </code></pre>
+
+          <pre style="float: left; width: 60%" class="fragment fade-in" data-fragment-index="3"><code data-trim contenteditable class="javascript">
+            type Query {
+              game(name: String!): Game
+              games: [Game]
+            }
           </code></pre>
         </section>
 
@@ -168,66 +171,68 @@ type Product implements Identifiable {
           <h2>Every field Is a Function</h2>
 
           <pre style="float: left; width: 50%"><code data-trim contenteditable class="javascript">
-query MyProduct {
-  products {
-    picture(size: 300) {
-      width, height, url
-    }
-  }
-}
+            query {
+              game(name: "cricket") {
+                  id
+                  matches {
+                      id
+                      squads {
+                          name
+                      }
+                      invites {
+                          count
+                      }
+                  }
+              }
+          }
           </code></pre>
 
-          <pre style="float: left; width: 50%" class="fragment fade-in" data-fragment-index="1"><code data-trim contenteditable class="javascript">
-{
-  "data": {
-    "products": [
-      {
-        "picture": {
-          "width": 300,
-          "height": 300,
-          "url": "http://..."
-        }
-      },
-      ...
-    ]
-  }
-}
-          </code></pre>
         </section>
 
         <section>
           <h2>Response Structure</h2>
 
           <pre style="float: left; width: 50%"><code data-trim contenteditable class="javascript">
-query MyProduct {
-  product(id: 123) {
-    name
-    description
-
-    picture {
-      width
-      height
-      url
-    }
-  }
-}
+            query d11HomePage {
+              game(name: "cricket") {
+                  id
+                  matches {
+                      id
+                      squads {
+                          name
+                      }
+                      invites {
+                          count
+                      }
+                  }
+              }
+          }
           </code></pre>
 
           <pre style="float: left; width: 50%" class="fragment fade-in" data-fragment-index="1"><code data-trim contenteditable class="javascript">
-{
-  "data": {
-    "product": {
-      "name": "Delicious Cake",
-      "description": "Just taste it!"
-
-      "picture": {
-        "width": 150,
-        "height": 150,
-        "url": "http://..."
-      }
-    }
-  }
-}
+            {
+              "data": {
+                "game": {
+                  "id": 1,
+                  "matches": [
+                    {
+                      "id": 1,
+                      "squads": [
+                        {
+                          "name": "India"
+                        },
+                        {
+                          "name": "West Indies"
+                        }
+                      ],
+                      "invites": {
+                        "count": 2
+                      }
+                    }
+                  ]
+                }
+              }
+            }
           </code></pre>
         </section>
         <section>
