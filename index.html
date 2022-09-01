@@ -285,6 +285,62 @@ subscription ProductEvents {
               </ul>
             </li>
           </ul>
+          <section>
+            <h2>Executing queries</h2>
+            <pre style="float: left; width: 50%">
+              <code data-trim contenteditable class="javascript">
+                import { gql, useQuery } from '@apollo/client';
+
+                const GET_DOGS = gql`
+                  query GetDogs {
+                    dogs {
+                      id
+                      breed
+                    }
+                  }
+                `;
+              </code>
+            </pre>
+        </section>
+        <section>
+          <h2>Components</h2>
+          <pre style="float: left; width: 50%">
+            <code data-trim contenteditable class="javascript">
+              function Dogs({ onDogSelected }) {
+                const { loading, error, data } = useQuery(GET_DOGS);
+              
+                if (loading) return 'Loading...';
+                if (error) return `Error! ${error.message}`;
+              
+                return (
+                  <select name='dog' onChange={onDogSelected}>
+                    {data.dogs.map((dog) => (
+                      <option key={dog.id} value={dog.breed}>
+                        {dog.breed}
+                      </option>
+                    ))}
+                  </select>
+                );
+              }
+            </code>
+          </pre>
+      </section>
+        <section>
+          <h2>Caching</h2>
+          <code data-trim contenteditable class="javascript">
+            function DogPhoto({ breed }) {
+              const { loading, error, data } = useQuery(GET_DOG_PHOTO, {
+                variables: { breed },
+              });
+            
+              if (loading) return null;
+              if (error) return `Error! ${error}`;
+            
+              return (
+                <img src={data.dog.displayImage} style={{ height: 100, width: 100 }} />
+              );
+            }
+          </code>
         </section>
         <section>
           <h2>Questions?</h2>
